@@ -27,6 +27,17 @@ select {
     background-color: red;
 }
 
+.refresh-widget-button {
+    color: white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 4px 7px;
+    background-color: black;
+}
+
 .widget-settings-button {
     color: white;
     position: absolute;

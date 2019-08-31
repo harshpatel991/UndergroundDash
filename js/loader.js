@@ -1,5 +1,8 @@
 //Load the widget configuration from saved values
 
+let Parser = require('rss-parser');
+let parser = new Parser();
+
 var data = {
     dragWidgetListName: '',
     dragWidgetListIndex: 0,
@@ -91,6 +94,10 @@ var mainController = {
     },
     rssMouseDown: function (e, model) {
         widgetMouseDown(e, model, 'rsses');
+    },
+    refreshRss: function (e, model) {
+        console.log("refresh rss");
+        refreshRss();
     },
 
     // calendar widget
@@ -221,6 +228,21 @@ refreshTime = function(){
 };
 
 refreshTime();
+
+function refreshRss() {
+    data.rsses.forEach(function (element) {
+        element.items = ["Refreshing..."];
+        (async () => {
+            let feed = await parser.parseURL('https://news.google.com/news/rss/headlines?ned=');
+            element.items = [];
+            for (var i = 0; (i < feed.items.length) && (i < 5); i++) {
+                element.items.push(feed.items[i].title);
+            }
+        })();
+    });
+}
+
+refreshRss();
 
 //TODO: need to refresh calendar
 

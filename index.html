@@ -41,8 +41,6 @@
     <h1 style="text-align: center">{calendar.currentDay }</h1>
     <h4 style="text-align: center">{calendar.currentDayOfWeek}</h4>
     <hr>
-
-
     <table>
         <td>S</td><td>M</td><td>T</td><td>W</td><td>T</td><td>F</td><td>S</td>
         <tr rv-each-calendar-row="calendar.value">
@@ -59,6 +57,7 @@
         <p rv-each-headline="rss.items">{ headline }</p>
     </div>
     <div class="remove-widget-button" rv-show="data.remove_mode" rv-on-click="controller.removeRss">X</div>
+    <div class="refresh-widget-button" rv-on-click="controller.refreshRss">r</div>
 </div>
 
 
