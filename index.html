@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html rv-on-mousemove="controller.elementDrag"  rv-on-mouseup="controller.closeDragElement" >
+<head>
+    <meta charset="UTF-8">
+    <title>Max Dash</title>
+    <link rel="stylesheet" href="css/styles.css"/>
+
+    <script>
+        var moment = require('moment-timezone');
+        var rivets= require('rivets');
+    </script>
+    <script src="js/draggable.js"></script>
+    <script src="js/widgets/clock.js"></script>
+</head>
+<body>
+<h1>Max Dash</h1>
+
+
+<span class="button" rv-on-click="controller.addClock" style="background-color:#fff;">Add Clock</span>
+<span class="button" rv-on-click="controller.addStickynote" style="background-color:#fff;">Add Stickynote</span>
+<span class="button" rv-on-click="controller.addRss" style="background-color:#fff;">Add Rss</span>
+<span class="button" rv-on-click="controller.addCalendar" style="background-color:#fff;">Add Calendar</span>
+<span class="button" rv-on-click="controller.addWeather" style="background-color:#fff;">Add Weather</span>
+<span class="button" rv-on-click="controller.toggleDeleteMode" style="background-color:#fff;">Remove</span>
+
+
+<div class="weather rounded-corners" rv-each-weather="data.weathers" rv-draggablex="weather.left" rv-draggabley="weather.top" rv-on-mousedown="controller.weatherMouseDown">
+    <div class="remove-widget-button" rv-show="data.remove_mode" rv-on-click="controller.removeWeather">X</div>
+    <h3>Weather</h3>
+    <h4>Chicago, IL</h4>
+    <h5>73 degrees F</h5>
+</div>
+
+<div class="sticky-note rounded-corners" rv-each-stickynote="data.stickynotes" rv-draggablex="stickynote.left" rv-draggabley="stickynote.top" rv-on-mousedown="controller.stickynoteMouseDown">
+    <textarea class="sticky-note-input" rv-value="stickynote.text"></textarea>
+    <div class="remove-widget-button" rv-show="data.remove_mode" rv-on-click="controller.removeStickynote">X</div>
+</div>
+
+
+<div class="calendar rounded-corners"  rv-each-calendar="data.calendars" rv-draggablex="calendar.left" rv-draggabley="calendar.top" rv-on-mousedown="controller.calendarMouseDown">
+    <h1 style="text-align: center">{calendar.currentDay }</h1>
+    <h4 style="text-align: center">{calendar.currentDayOfWeek}</h4>
+    <hr>
+
+
+    <table>
+        <td>S</td><td>M</td><td>T</td><td>W</td><td>T</td><td>F</td><td>S</td>
+        <tr rv-each-calendar-row="calendar.value">
+            <td rv-each-calendar-day="calendar-row" rv-text="calendar-day" rv-text="calendar-day"></td>
+        </tr>
+    </table>
+    <span>< <span rv-text="calendar.selectedMonth"></span>  { calendar.selectedYear } ></span>
+    <div class="remove-widget-button" rv-show="data.remove_mode" rv-on-click="controller.removeCalendar">X</div>
+</div>
+
+
+<div class="google-news rounded-corners" rv-each-rss="data.rsses" rv-draggablex="rss.left" rv-draggabley="rss.top" rv-on-mousedown="controller.rssMouseDown">
+    <div>
+        <p rv-each-headline="rss.items">{ headline }</p>
+    </div>
+    <div class="remove-widget-button" rv-show="data.remove_mode" rv-on-click="controller.removeRss">X</div>
+</div>
+
+
+<div class="clock rounded-corners" rv-each-clock="data.clocks" rv-draggablex="clock.left" rv-draggabley="clock.top" rv-on-mousedown="controller.clockMouseDown" >
+    <div rv-hide="clock.settings_open" id="{clock.id}">
+        <h3 class="clock-value">{ clock.value }</h3>
+        <div>{ clock.city.name }</div>
+        <div class="widget-settings-button" rv-hide="clock.settings_open" rv-on-click="controller.showClockSettings">i</div>
+    </div>
+    <div class="remove-widget-button" rv-show="data.remove_mode" rv-on-click="controller.removeClock">X</div>
+    <div class="widget-settings" rv-show="clock.settings_open">
+        Settings
+        <select rv-value="clock.city.id" rv-on-change="controller.selectClockCity">
+            <option rv-each-city="data.cities" rv-value="city.id">{ city.name }</option>
+
+        </select>
+
+        <div class="widget-settings-save-button" rv-on-click="controller.closeClockSettings">Done</div>
+    </div>
+</div>
+
+
+<script src="js/loader.js"></script>
+</body>
+
+</html>

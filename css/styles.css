@@ -1,0 +1,134 @@
+body {
+    color: #475d72;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(180deg, #28314e 1%, #131825 100%) no-repeat center center fixed;
+    /*background-color: #172538;*/
+}
+
+select {
+    display: block;
+    width: 100%;
+    font-size: 14px;
+    margin: 10px;
+}
+
+.rounded-corners {
+    border-radius: 20px;
+}
+
+.remove-widget-button {
+    color: white;
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 4px 7px;
+    background-color: red;
+}
+
+.widget-settings-button {
+    color: white;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 4px 7px;
+    background-color: black;
+}
+
+
+
+.widget-settings-save-button {
+    background-color: #2eb532;
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 15px;
+}
+
+.sticky-note {
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#fff7bb+0,feec7d+100 */
+    background: #fff7bb; /* Old browsers */
+    background: -moz-linear-gradient(top,  #fff7bb 0%, #feec7d 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  #fff7bb 0%,#feec7d 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  #fff7bb 0%,#feec7d 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff7bb', endColorstr='#feec7d',GradientType=0 ); /* IE6-9 */
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    padding: 20px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.22), 0 15px 40px rgba(0, 0, 0, 0.36)
+}
+
+.sticky-note-input {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255,255,255,0);
+    border: none;
+    resize: none;
+
+    overflow-y: auto;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+
+}
+
+.sticky-note-input:focus {
+    outline: none;
+}
+
+.weather {
+    /*background-color: #08164b;*/
+    position: absolute;
+    color: #fff;
+    padding: 20px;
+    background-image: url('../images/ocean.jpg');
+    background-size: cover;
+    width: 300px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.22), 0 15px 40px rgba(0, 0, 0, 0.36);
+    background-position-y: top;
+}
+
+.calendar {
+    /*background-color: #fff;*/
+    position: absolute;
+    padding: 20px;
+    background-image: url('../images/canyon.jpg');
+    background-size: cover;
+    color: #fff;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.22), 0 15px 40px rgba(0, 0, 0, 0.36)
+}
+
+.clock {
+    position: absolute;
+    background-color: #000000;
+    color: #ffffff;
+    padding: 20px;
+    background-image: url('../images/city.jpg');
+    background-size: cover;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.22), 0 15px 40px rgba(0, 0, 0, 0.36);
+    width: 200px;
+    text-align: center;
+}
+
+.clock-value {
+    font-size: 30px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.google-news {
+    position: absolute;
+    background-color: #172538;
+    color: #fff;
+    padding: 20px;
+    background-image: url('../images/ferns.jpg');
+    background-size: cover;
+    max-width: 500px;
+    font-weight: bold;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.22), 0 15px 40px rgba(0, 0, 0, 0.36);
+}
+
