@@ -13,16 +13,17 @@
     <script src="js/widgets/clock.js"></script>
 </head>
 <body>
-<h1>Max Dash</h1>
 
-
-<span class="button" rv-on-click="controller.addClock" style="background-color:#fff;">Add Clock</span>
-<span class="button" rv-on-click="controller.addStickynote" style="background-color:#fff;">Add Stickynote</span>
-<span class="button" rv-on-click="controller.addRss" style="background-color:#fff;">Add Rss</span>
-<span class="button" rv-on-click="controller.addCalendar" style="background-color:#fff;">Add Calendar</span>
-<span class="button" rv-on-click="controller.addWeather" style="background-color:#fff;">Add Weather</span>
-<span class="button" rv-on-click="controller.toggleDeleteMode" style="background-color:#fff;">Remove</span>
-
+<div style="position: absolute; bottom: 20px">
+    <span class="menu-button large-button " rv-on-click="controller.toggleMenu" rv-hide="data.is_menu_open">Menu</span>
+    <span class="menu-button large-button " rv-on-click="controller.toggleMenu" rv-show="data.is_menu_open">Close</span>
+    <span class="menu-button" rv-on-click="controller.addClock" rv-show="data.is_menu_open">Add Clock</span>
+    <span class="menu-button" rv-on-click="controller.addStickynote" rv-show="data.is_menu_open">Add Stickynote</span>
+    <span class="menu-button" rv-on-click="controller.addRss" rv-show="data.is_menu_open">Add Rss</span>
+    <span class="menu-button" rv-on-click="controller.addCalendar" rv-show="data.is_menu_open">Add Calendar</span>
+    <span class="menu-button" rv-on-click="controller.addWeather" rv-show="data.is_menu_open">Add Weather</span>
+    <span class="menu-button menu-remove-button " rv-on-click="controller.toggleDeleteMode" rv-show="data.is_menu_open">Remove Widget</span>
+</div>
 
 <div class="weather rounded-corners" rv-each-weather="data.weathers" rv-draggablex="weather.left" rv-draggabley="weather.top" rv-on-mousedown="controller.weatherMouseDown">
     <div class="remove-widget-button" rv-show="data.remove_mode" rv-on-click="controller.removeWeather">X</div>

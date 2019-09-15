@@ -1,4 +1,5 @@
 body {
+    padding: 5px;
     color: #475d72;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     background: linear-gradient(180deg, #28314e 1%, #131825 100%) no-repeat center center fixed;
@@ -14,6 +15,35 @@ select {
 
 .rounded-corners {
     border-radius: 20px;
+}
+
+.menu-button {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+
+    /*
+      Introduced in IE 10.
+      See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+    */
+    -ms-user-select: none;
+    user-select: none;
+
+    background-color: #73737345;
+    color: #fff;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 5px;
+    font-size: 12px;
+}
+
+.menu-remove-button {
+    background-color: #de415e69;
+}
+
+.large-button {
+    font-size: 18px;
+    padding: 12px;
 }
 
 .remove-widget-button {
@@ -96,7 +126,7 @@ select {
     position: absolute;
     color: #fff;
     padding: 20px;
-    background-image: url('../images/ocean.jpg');
+    background-image: url('../images/leaves.jpeg');
     background-size: cover;
     width: 300px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.22), 0 15px 40px rgba(0, 0, 0, 0.36);
@@ -107,7 +137,7 @@ select {
     /*background-color: #fff;*/
     position: absolute;
     padding: 20px;
-    background-image: url('../images/canyon.jpg');
+    background-image: url('../images/canyon-3.jpeg');
     background-size: cover;
     color: #fff;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.22), 0 15px 40px rgba(0, 0, 0, 0.36)
@@ -118,11 +148,12 @@ select {
     background-color: #000000;
     color: #ffffff;
     padding: 20px;
-    background-image: url('../images/city.jpg');
+    background-image: url('../images/ocean.jpeg');
     background-size: cover;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.22), 0 15px 40px rgba(0, 0, 0, 0.36);
     width: 200px;
     text-align: center;
+    background-position: bottom;
 }
 
 .clock-value {
@@ -136,7 +167,7 @@ select {
     background-color: #172538;
     color: #fff;
     padding: 20px;
-    background-image: url('../images/ferns.jpg');
+    background-image: url('../images/mountains.jpeg');
     background-size: cover;
     max-width: 500px;
     font-weight: bold;

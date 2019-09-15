@@ -7,6 +7,7 @@ var data = {
     dragWidgetListName: '',
     dragWidgetListIndex: 0,
     remove_mode: false,
+    is_menu_open: false,
     widgets: [
         {
             title: 'clock',
@@ -27,6 +28,10 @@ var data = {
 };
 
 var mainController = {
+    toggleMenu: function (e, model) {
+        data.is_menu_open = !data.is_menu_open;
+    },
+
     toggleDeleteMode: function (e, model) {
         data.remove_mode = !data.remove_mode;
     },
