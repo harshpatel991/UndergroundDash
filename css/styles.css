@@ -2,8 +2,8 @@ body {
     padding: 5px;
     color: #475d72;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    background: linear-gradient(180deg, #28314e 1%, #131825 100%) no-repeat center center fixed;
-    /*background-color: #172538;*/
+    background-image: url('../images/airplane.jpg');
+    background-size: cover;
 }
 
 select {
@@ -79,8 +79,6 @@ select {
     background-color: black;
 }
 
-
-
 .widget-settings-save-button {
     background-color: #2eb532;
     color: #fff;
@@ -90,11 +88,8 @@ select {
 }
 
 .sticky-note {
-    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#fff7bb+0,feec7d+100 */
-    background: #fff7bb; /* Old browsers */
-    background: -moz-linear-gradient(top,  #fff7bb 0%, #feec7d 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top,  #fff7bb 0%,#feec7d 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom,  #fff7bb 0%,#feec7d 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background-color: #00000061;
+    backdrop-filter: blur(10px);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff7bb', endColorstr='#feec7d',GradientType=0 ); /* IE6-9 */
     width: 200px;
     height: 200px;
@@ -114,6 +109,7 @@ select {
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     font-weight: bold;
     font-size: 14px;
+    color: #fff;
 
 }
 
@@ -122,11 +118,11 @@ select {
 }
 
 .weather {
-    /*background-color: #08164b;*/
     position: absolute;
     color: #fff;
     padding: 20px;
-    background-image: url('../images/leaves.jpeg');
+    background-color: #00000061;
+    backdrop-filter: blur(10px);
     background-size: cover;
     width: 300px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.22), 0 15px 40px rgba(0, 0, 0, 0.36);
@@ -134,10 +130,10 @@ select {
 }
 
 .calendar {
-    /*background-color: #fff;*/
     position: absolute;
     padding: 20px;
-    background-image: url('../images/canyon-3.jpeg');
+    background-color: #00000061;
+    backdrop-filter: blur(10px);
     background-size: cover;
     color: #fff;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.22), 0 15px 40px rgba(0, 0, 0, 0.36)
@@ -145,10 +141,10 @@ select {
 
 .clock {
     position: absolute;
-    background-color: #000000;
     color: #ffffff;
     padding: 20px;
-    background-image: url('../images/ocean.jpeg');
+    background-color: #00000061;
+    backdrop-filter: blur(10px);
     background-size: cover;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.22), 0 15px 40px rgba(0, 0, 0, 0.36);
     width: 200px;
@@ -164,10 +160,10 @@ select {
 
 .google-news {
     position: absolute;
-    background-color: #172538;
+    background-color: #00000061;
+    backdrop-filter: blur(10px);
     color: #fff;
     padding: 20px;
-    background-image: url('../images/mountains.jpeg');
     background-size: cover;
     max-width: 500px;
     font-weight: bold;
