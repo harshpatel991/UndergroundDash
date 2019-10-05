@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Max Dash</title>
     <link rel="stylesheet" href="css/styles.css"/>
+    <link rel="stylesheet" href="css/weather-icons.min.css"/>
 
     <script>
         var moment = require('moment-timezone');
@@ -27,9 +28,39 @@
 
 <div class="weather rounded-corners" rv-each-weather="data.weathers" rv-draggablex="weather.left" rv-draggabley="weather.top" rv-on-mousedown="controller.weatherMouseDown">
     <div class="remove-widget-button" rv-show="data.remove_mode" rv-on-click="controller.removeWeather">X</div>
-    <h3>Weather</h3>
-    <h4>Chicago, IL</h4>
-    <h5>73 degrees F</h5>
+
+    <div rv-hide="weather.settings.open">
+
+        <table>
+            <tr>
+                <td><div style="font-size: 60px;"><i rv-set-weather-class="weather.currentCode" class="wi"></i></div></td>
+                <td>
+                    <div style="font-size: 35px;">{ weather.currentTemperature }°</div>
+                    { weather.location }
+                </td>
+            </tr>
+        </table>
+
+        <table width="100%">
+            <tr>
+                <td rv-each-forecast="weather.forecasts">
+                    <p style="text-align: center;">{ forecast.day }</p>
+                    <h2 style="text-align: center"><i rv-set-weather-class="forecast.code" class="wi"></i></h2>
+                    <p style="margin-bottom: 0px; text-align: center">{ forecast.high }°</p>
+                    <p style="font-size: 10px; margin-top: 0px; text-align: center; color: rgba(255,255,255,0.47);">{ forecast.low }°</p>
+
+                </td>
+            </tr>
+        </table>
+
+        <div class="widget-settings-button" rv-hide="clock.settings,open" rv-on-click="controller.showWeatherSettings">i</div>
+    </div>
+
+    <div class="widget-settings" rv-show="weather.settings.open">
+        Settings
+        <input rv-value="weather.settings.location" name="city"/>
+        <div class="widget-settings-save-button" rv-on-click="controller.saveWeather">Done</div>
+    </div>
 </div>
 
 <div class="sticky-note rounded-corners" rv-each-stickynote="data.stickynotes" rv-draggablex="stickynote.left" rv-draggabley="stickynote.top" rv-on-mousedown="controller.stickynoteMouseDown">

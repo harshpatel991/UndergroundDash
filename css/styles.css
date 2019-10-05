@@ -63,9 +63,9 @@ select {
     bottom: 0;
     left: 0;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 15px;
     padding: 4px 7px;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.05);
 }
 
 .widget-settings-button {
@@ -76,7 +76,7 @@ select {
     cursor: pointer;
     border-radius: 5px;
     padding: 4px 7px;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.05);;
 }
 
 .widget-settings-save-button {

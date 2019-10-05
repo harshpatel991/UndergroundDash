@@ -21,7 +21,7 @@ var data = {
     stickynotes: [{left: "150px", top: "150px", text: 'hello world'}, {left: "300px", top: "300px", text: 'blah blah'}],
     rsses: [{maxItemsCount: 5, items: ['HeadlineA', 'HeadlineB', 'HeadlineC']}],
     calendars: [{ currentDay: 1, currentDayOfWeek: 'Friday', selectedMonth: 1, selectedYear: 2000, value: []}],
-    weathers: [{location: 'Chicago, IL', currentTemperature: '73F', units: 'F'}],
+    weathers: [{top: "135px", left: "784px", location: '', currentTemperature: '', currentCode: 1, forecasts: [{day: "Mon", high: 80, low: 60, text: "Mostly Sunny"}], settings: {location: 'Chicago, IL', unit: 'F', open: false}}],
 
     cities: [{id: 'America/New_York', name: 'New York'}, {id: 'America/Chicago', name: 'Chicago'}]
 
@@ -133,13 +133,14 @@ var mainController = {
         model.data.weathers.splice(model.index, 1);
     },
     showWeatherSettings: function (e, model) {
-        //None
+        model.data.weathers[model.index].settings.open = true;
     },
     closeWeatherSettings: function (e, model) {
-        //None
+        model.data.weathers[model.index].settings.open = false;
     },
     saveWeather: function (e, model) {
-        console.log('save' + JSON.stringify(model.data.calendars[model.index]));
+        model.data.weathers[model.index].settings.open = false;
+        refreshWeather();
     },
     weatherMouseDown: function (e, model) {
         widgetMouseDown(e, model, 'weathers');
@@ -249,7 +250,28 @@ function refreshRss() {
 
 refreshRss();
 
+function refreshWeather() {
+    data.weathers.forEach(function (element) {
+
+        fetch('http://roastmygame.com/weather?location=' + element.settings.location).then(
+            data => { return data.json();  }
+        ). then(data => {
+            element.currentTemperature = data.current_observation.condition.temperature;
+            element.currentCode = data.current_observation.condition.code;
+            element.location = data.location.city + ', ' + data.location.region;
+            element.forecasts = data.forecasts.slice(0, 7);
+        } );
+
+    });
+}
+
+refreshWeather();
+
 //TODO: need to refresh calendar
+
+rivets.binders['set-weather-class'] = function(el, value){
+    el.className += ' wi-yahoo-'+ value;
+};
 
 rivets.bind(
     document,
