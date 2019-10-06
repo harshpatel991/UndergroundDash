@@ -20,7 +20,7 @@ var data = {
     clocks: [{left: "100px", top: "100px", city: {id: 'America/New_York', name: 'New York'}, settings_open: false, value: ''}, {left: "200px", top: "200px", city: {id: 'America/Chicago', name: 'Chicago'}, settings_open: false, value: ''}],
     stickynotes: [{left: "150px", top: "150px", text: 'hello world'}, {left: "300px", top: "300px", text: 'blah blah'}],
     rsses: [{maxItemsCount: 5, items: ['HeadlineA', 'HeadlineB', 'HeadlineC']}],
-    calendars: [{ currentDay: 1, currentDayOfWeek: 'Friday', selectedMonth: 1, selectedYear: 2000, value: []}],
+    calendars: [{ currentDay: 1, currentMonth: 1, selectedMonth: 1, selectedYear: 2000}],
     weathers: [{top: "135px", left: "784px", location: '', currentTemperature: '', currentCode: 1, forecasts: [{day: "Mon", high: 80, low: 60, text: "Mostly Sunny"}], settings: {location: 'Chicago, IL', unit: 'F', open: false}}],
 
     cities: [{id: 'America/New_York', name: 'New York'}, {id: 'America/Chicago', name: 'Chicago'}]
@@ -176,16 +176,15 @@ rivets.formatters.formatCalendar = function(calendar) {
 function refreshCalendar() {
 
     data.calendars.forEach(function (calendar) {
-        var currentYear = calendar.currentYear;
-        var currentMonth = calendar.currentMonth;
-        var currentDay = calendar.currentDay;
-        var selectedYear = calendar.selectedYear;
-        var selectedMonth = calendar.selectedMonth;
-        console.log(currentYear, currentMonth, currentDay, selectedYear, selectedMonth);
+        var d = moment();
+        calendar.currentDay = d.date();
+        calendar.currentMonth = d.month();
+        calendar.currentDayOfWeek = d.format('dddd');
+
+        var selectedYear = d.year(); //for now, the selected year is current year
+        var selectedMonth = d.month(); //for now, the selected month is the current month
 
         let firstDay = (new Date(selectedYear, selectedMonth)).getDay();
-
-        console.log(firstDay);
 
         let date = 1;
         let rows = [];
@@ -272,6 +271,11 @@ refreshWeather();
 rivets.binders['set-weather-class'] = function(el, value){
     el.className += ' wi-yahoo-'+ value;
 };
+
+rivets.formatters.eq = function(value, checkAgainst)
+{
+    return (value == checkAgainst);
+}
 
 rivets.bind(
     document,

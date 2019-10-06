@@ -35,8 +35,8 @@
             <tr>
                 <td><div style="font-size: 60px;"><i rv-set-weather-class="weather.currentCode" class="wi"></i></div></td>
                 <td>
-                    <div style="font-size: 35px;">{ weather.currentTemperature }°</div>
-                    { weather.location }
+                    <div style="font-size: 50px; font-weight: bold;">{ weather.currentTemperature }°</div>
+                    <div style="font-weight: bold;">{ weather.location }</div>
                 </td>
             </tr>
         </table>
@@ -44,10 +44,10 @@
         <table width="100%">
             <tr>
                 <td rv-each-forecast="weather.forecasts">
-                    <p style="text-align: center;">{ forecast.day }</p>
+                    <p style="text-align: center; font-size: 10px;">{ forecast.day }</p>
                     <h2 style="text-align: center"><i rv-set-weather-class="forecast.code" class="wi"></i></h2>
                     <p style="margin-bottom: 0px; text-align: center">{ forecast.high }°</p>
-                    <p style="font-size: 10px; margin-top: 0px; text-align: center; color: rgba(255,255,255,0.47);">{ forecast.low }°</p>
+                    <p style="font-size: 10px; margin-top: 5px; text-align: center; color: rgba(255,255,255,0.47);">{ forecast.low }°</p>
 
                 </td>
             </tr>
@@ -70,16 +70,15 @@
 
 
 <div class="calendar rounded-corners"  rv-each-calendar="data.calendars" rv-draggablex="calendar.left" rv-draggabley="calendar.top" rv-on-mousedown="controller.calendarMouseDown">
-    <h1 style="text-align: center">{calendar.currentDay }</h1>
-    <h4 style="text-align: center">{calendar.currentDayOfWeek}</h4>
-    <hr>
+    <h1 style="text-align: center; font-size:50px; margin-top: 0; margin-bottom: 0;">{calendar.currentDay }</h1>
+    <h4 style="text-align: center; margin-top: 5px; margin-bottom: 15px;">{calendar.currentDayOfWeek}</h4>
+
     <table>
-        <td>S</td><td>M</td><td>T</td><td>W</td><td>T</td><td>F</td><td>S</td>
+        <tr style="font-size: 10px;"><td>S</td><td>M</td><td>T</td><td>W</td><td>T</td><td>F</td><td>S</td></tr>
         <tr rv-each-calendar-row="calendar.value">
-            <td rv-each-calendar-day="calendar-row" rv-text="calendar-day" rv-text="calendar-day"></td>
+            <td rv-each-calendar-day="calendar-row" rv-text="calendar-day" rv-class-red-bold="calendar-day | eq calendar.currentDay">{calendar-day}</td>
         </tr>
     </table>
-    <span>< <span rv-text="calendar.selectedMonth"></span>  { calendar.selectedYear } ></span>
     <div class="remove-widget-button" rv-show="data.remove_mode" rv-on-click="controller.removeCalendar">X</div>
 </div>
 
@@ -96,7 +95,7 @@
 <div class="clock rounded-corners" rv-each-clock="data.clocks" rv-draggablex="clock.left" rv-draggabley="clock.top" rv-on-mousedown="controller.clockMouseDown" >
     <div rv-hide="clock.settings_open" id="{clock.id}">
         <h3 class="clock-value">{ clock.value }</h3>
-        <div>{ clock.city.name }</div>
+        <div style="font-weight: bold;">{ clock.city.name }</div>
         <div class="widget-settings-button" rv-hide="clock.settings_open" rv-on-click="controller.showClockSettings">i</div>
     </div>
     <div class="remove-widget-button" rv-show="data.remove_mode" rv-on-click="controller.removeClock">X</div>

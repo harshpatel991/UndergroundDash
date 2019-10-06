@@ -13,6 +13,11 @@ select {
     margin: 10px;
 }
 
+.red-bold {
+    color: red;
+    font-weight: bold;
+}
+
 .rounded-corners {
     border-radius: 20px;
 }
@@ -147,13 +152,13 @@ select {
     backdrop-filter: blur(10px);
     background-size: cover;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.22), 0 15px 40px rgba(0, 0, 0, 0.36);
-    width: 200px;
+    width: 250px;
     text-align: center;
     background-position: bottom;
 }
 
 .clock-value {
-    font-size: 30px;
+    font-size: 35px;
     margin-bottom: 10px;
     margin-top: 10px;
 }
