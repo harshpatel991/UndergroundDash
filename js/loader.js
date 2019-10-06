@@ -21,6 +21,7 @@ var data = {
         {id: 'America/Anchorage', name: 'Anchorage'},
         {id: 'America/Denver', name: 'Denver'},
         {id: 'America/Chicago', name: 'Chicago'},
+        {id: 'America/New_York', name: 'New York'},
         {id: 'America/Bogota', name: 'Bogota'},
         {id: 'America/Caracas', name: 'Caracas'},
         {id: 'America/Argentina/Buenos_Aires', name: 'Buenos Aires'},
@@ -99,6 +100,7 @@ var mainController = {
     // rss widget
     addRss: function (e, model) {
         model.data.rsses.push({maxItemsCount: 5, items: ['HeadlineA', 'HeadlineB', 'HeadlineC']});
+        refreshRss();
     },
     removeRss: function (e, model) {
         model.data.rsses.splice(model.index, 1);
@@ -123,6 +125,7 @@ var mainController = {
     // calendar widget
     addCalendar: function (e, model) {
         model.data.calendars.push({currentDay: 1, currentMonth: 1, currentYear: 2000, selectedMonth: 1, selectedYear: 2000, value: []});
+        refreshCalendar();
     },
     removeCalendar: function (e, model) {
         model.data.calendars.splice(model.index, 1);

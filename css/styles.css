@@ -7,6 +7,10 @@ body {
     overflow: hidden;
 }
 
+::selection {
+    background: rgba(255, 183, 183, 0); /* WebKit/Blink Browsers */
+}
+
 select {
     display: block;
     width: 100%;
@@ -116,7 +120,10 @@ select {
     font-weight: bold;
     font-size: 14px;
     color: #fff;
+}
 
+.sticky-note-input::selection {
+    background: red;
 }
 
 .sticky-note-input:focus {
