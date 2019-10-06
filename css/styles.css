@@ -4,6 +4,7 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     background-image: url('../images/airplane.jpg');
     background-size: cover;
+    overflow: hidden;
 }
 
 select {
@@ -14,8 +15,10 @@ select {
 }
 
 .red-bold {
-    color: red;
+    color: white;
     font-weight: bold;
+    background-color: red;
+    border-radius: 15px;
 }
 
 .rounded-corners {
@@ -139,7 +142,8 @@ select {
     backdrop-filter: blur(10px);
     background-size: cover;
     color: #fff;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.22), 0 15px 40px rgba(0, 0, 0, 0.36)
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.22), 0 15px 40px rgba(0, 0, 0, 0.36);
+    text-align: center;
 }
 
 .clock {

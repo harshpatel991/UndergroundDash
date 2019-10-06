@@ -8,22 +8,37 @@ var data = {
     dragWidgetListIndex: 0,
     remove_mode: false,
     is_menu_open: false,
-    widgets: [
-        {
-            title: 'clock',
-            region_to_city_options: {asia: ['abu_dhabi'], africa: ['ababa', 'blah_city']}
-        },
-        {
-            title: 'sticky_note'
-        }
-    ],
     clocks: [{left: "100px", top: "100px", city: {id: 'America/New_York', name: 'New York'}, settings_open: false, value: ''}, {left: "200px", top: "200px", city: {id: 'America/Chicago', name: 'Chicago'}, settings_open: false, value: ''}],
     stickynotes: [{left: "150px", top: "150px", text: 'hello world'}, {left: "300px", top: "300px", text: 'blah blah'}],
     rsses: [{maxItemsCount: 5, items: [{title: "", source: ""}]}],
     calendars: [{ currentDay: 1, currentMonth: 1, selectedMonth: 1, selectedYear: 2000}],
     weathers: [{top: "135px", left: "784px", location: '', currentTemperature: '', currentCode: 1, forecasts: [{day: "Mon", high: 80, low: 60, text: "Mostly Sunny"}], settings: {location: 'Chicago, IL', unit: 'F', open: false}}],
 
-    cities: [{id: 'America/New_York', name: 'New York'}, {id: 'America/Chicago', name: 'Chicago'}]
+    cities: [
+        {id: 'US/Samoa', name: 'Samoa'},
+        {id: 'US/Hawaii', name: 'Hawaii'},
+        {id: 'US/Alaska', name: 'Alaska'},
+        {id: 'America/Anchorage', name: 'Anchorage'},
+        {id: 'America/Denver', name: 'Denver'},
+        {id: 'America/Chicago', name: 'Chicago'},
+        {id: 'America/Bogota', name: 'Bogota'},
+        {id: 'America/Caracas', name: 'Caracas'},
+        {id: 'America/Argentina/Buenos_Aires', name: 'Buenos Aires'},
+        {id: 'Atlantic/Azores', name: 'Azores'},
+        {id: 'Europe/London', name: 'London'},
+        {id: 'Europe/Amsterdam', name: 'Amsterdam'},
+        {id: 'Europe/Athens', name: 'Athens'},
+        {id: 'Asia/Baghdad', name: 'Baghdad'},
+        {id: 'Asia/Calcutta', name: 'Calcutta'},
+        {id: 'Asia/Almaty', name: 'Almaty'},
+        {id: 'Asia/Bangkok', name: 'Bangkok'},
+        {id: 'Asia/Chongqing', name: 'Chongqing'},
+        {id: 'Asia/Hong_Kong', name: 'Hong Kong'},
+        {id: 'Asia/Seoul', name: 'Seoul'},
+        {id: 'Australia/Brisbane', name: 'Brisbane'},
+        {id: 'Asia/Magadan', name: 'Magadan'},
+        {id: 'Pacific/Auckland', name: 'Auckland'}
+    ]
 
 };
 
