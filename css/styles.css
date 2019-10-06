@@ -122,7 +122,11 @@ select {
     color: #fff;
 }
 
-.sticky-note-input::selection {
+input::selection {
+    background: red;
+}
+
+textarea::selection {
     background: red;
 }
 

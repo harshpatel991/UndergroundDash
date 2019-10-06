@@ -2,17 +2,23 @@
 
 let Parser = require('rss-parser');
 let parser = new Parser();
+const Store = require('electron-store');
+var debounce = require('debounce');
+
+const store = new Store();
 
 var data = {
+    showWidgets: false, //hides the widgets initially so they don't flash on the screen
+    isMouseDown: false,
     dragWidgetListName: '',
     dragWidgetListIndex: 0,
     remove_mode: false,
     is_menu_open: false,
-    clocks: [{left: "100px", top: "100px", city: {id: 'America/New_York', name: 'New York'}, settings_open: false, value: ''}, {left: "200px", top: "200px", city: {id: 'America/Chicago', name: 'Chicago'}, settings_open: false, value: ''}],
-    stickynotes: [{left: "150px", top: "150px", text: 'hello world'}, {left: "300px", top: "300px", text: 'blah blah'}],
-    rsses: [{maxItemsCount: 5, items: [{title: "", source: ""}]}],
-    calendars: [{ currentDay: 1, currentMonth: 1, selectedMonth: 1, selectedYear: 2000}],
-    weathers: [{top: "135px", left: "784px", location: '', currentTemperature: '', currentCode: 1, forecasts: [{day: "Mon", high: 80, low: 60, text: "Mostly Sunny"}], settings: {location: 'Chicago, IL', unit: 'F', open: false}}],
+    clocks: [],
+    stickynotes: [],
+    rsses: [],
+    calendars: [],
+    weathers: [],
 
     cities: [
         {id: 'US/Samoa', name: 'Samoa'},
@@ -40,35 +46,47 @@ var data = {
         {id: 'Asia/Magadan', name: 'Magadan'},
         {id: 'Pacific/Auckland', name: 'Auckland'}
     ]
-
 };
+
+function loadInitialData() {
+    var loadedData = store.get('data');
+    if(typeof loadedData !== 'undefined' ) {
+        data = loadedData;
+    }
+    data.showWidgets = true;
+};
+
+loadInitialData();
 
 var mainController = {
     toggleMenu: function (e, model) {
         data.is_menu_open = !data.is_menu_open;
+        data.remove_mode = false;
+        saveDebounced();
     },
 
     toggleDeleteMode: function (e, model) {
         data.remove_mode = !data.remove_mode;
+        saveDebounced();
     },
 
     // Clock widget
     addClock: function (e, model) {
-        model.data.clocks.push({left: "300px", top: "300px", city: {id: 'America/New_York', name: 'New York'}}); //TODO: find from user's region?
+        model.data.clocks.push({left: "300px", top: "300px", city: {id: 'America/New_York', name: 'New York'}});
         refreshTime();
+        saveDebounced();
     },
     removeClock: function (e, model) {
         model.data.clocks.splice(model.index, 1);
+        saveDebounced();
     },
     showClockSettings: function (e, model) {
         model.data.clocks[model.index].settings_open = true;
     },
-    closeClockSettings: function (e, model) {
-        model.data.clocks[model.index].settings_open = false;
-    },
     // Save widget settings
     saveClock: function (e, model) {
-        console.log('save' + JSON.stringify(model.data.clocks[model.index]));
+        model.data.clocks[model.index].settings_open = false;
+        saveDebounced();
     },
     clockMouseDown: function (e, model) {
         widgetMouseDown(e, model, 'clocks');
@@ -80,9 +98,11 @@ var mainController = {
     // stickynote widget
     addStickynote: function (e, model) {
         model.data.stickynotes.push({left: 400, top: 400, text: ''});
+        saveDebounced();
     },
     removeStickynote: function (e, model) {
         model.data.stickynotes.splice(model.index, 1);
+        saveDebounced();
     },
     showStickynoteSettings: function (e, model) {
         //None
@@ -90,8 +110,11 @@ var mainController = {
     closeStickynoteSettings: function (e, model) {
         //None
     },
+    changeStickynoteText: function (e, model) {
+        saveDebounced();
+    },
     saveStickynote: function (e, model) {
-        console.log('save' + JSON.stringify(model.data.stickynotes[model.index]));
+        //None
     },
     stickynoteMouseDown: function (e, model) {
         widgetMouseDown(e, model, 'stickynotes');
@@ -99,11 +122,13 @@ var mainController = {
 
     // rss widget
     addRss: function (e, model) {
-        model.data.rsses.push({maxItemsCount: 5, items: ['HeadlineA', 'HeadlineB', 'HeadlineC']});
+        model.data.rsses.push({maxItemsCount: 5, items: [{title: "", source: ""}]});
+        saveDebounced();
         refreshRss();
     },
     removeRss: function (e, model) {
         model.data.rsses.splice(model.index, 1);
+        saveDebounced();
     },
     showRssSettings: function (e, model) {
         //None
@@ -112,23 +137,24 @@ var mainController = {
         //None
     },
     saveRss: function (e, model) {
-        console.log('save' + JSON.stringify(model.data.rsses[model.index]));
+        //None
     },
     rssMouseDown: function (e, model) {
         widgetMouseDown(e, model, 'rsses');
     },
     refreshRss: function (e, model) {
-        console.log("refresh rss");
         refreshRss();
     },
 
     // calendar widget
     addCalendar: function (e, model) {
-        model.data.calendars.push({currentDay: 1, currentMonth: 1, currentYear: 2000, selectedMonth: 1, selectedYear: 2000, value: []});
+        model.data.calendars.push({ currentDay: 1, currentMonth: 1, selectedMonth: 1, selectedYear: 2000});
+        saveDebounced();
         refreshCalendar();
     },
     removeCalendar: function (e, model) {
         model.data.calendars.splice(model.index, 1);
+        saveDebounced();
     },
     showCalendarSettings: function (e, model) {
         //None
@@ -137,7 +163,7 @@ var mainController = {
         //None
     },
     saveCalendar: function (e, model) {
-        console.log('save' + JSON.stringify(model.data.calendars[model.index]));
+        //None
     },
     calendarMouseDown: function (e, model) {
         widgetMouseDown(e, model, 'calendars');
@@ -147,19 +173,19 @@ var mainController = {
     addWeather: function (e, model) {
         model.data.weathers.push({top: "135px", left: "784px", location: '', currentTemperature: '', currentCode: 1, forecasts: [{day: "Mon", high: 80, low: 60, text: "Mostly Sunny"}], settings: {location: 'Chicago, IL', unit: 'F', open: false}});
         refreshWeather();
+        saveDebounced();
     },
     removeWeather: function (e, model) {
         model.data.weathers.splice(model.index, 1);
+        saveDebounced();
     },
     showWeatherSettings: function (e, model) {
         model.data.weathers[model.index].settings.open = true;
     },
-    closeWeatherSettings: function (e, model) {
-        model.data.weathers[model.index].settings.open = false;
-    },
     saveWeather: function (e, model) {
         model.data.weathers[model.index].settings.open = false;
         refreshWeather();
+        saveDebounced();
     },
     weatherMouseDown: function (e, model) {
         widgetMouseDown(e, model, 'weathers');
@@ -168,13 +194,14 @@ var mainController = {
     elementDrag: function (e, model) {
         if (data.isMouseDown) {
             e.preventDefault();
-
+            saveDebounced();
             model.data[data.dragWidgetListName][data.dragWidgetListIndex].top = (e.clientY - data.mouseYOffset) + "px";
             model.data[data.dragWidgetListName][data.dragWidgetListIndex].left = (e.clientX - data.mouseXOffset) + "px";
         }
     },
     closeDragElement: function (e, model) {
         data.isMouseDown = false;
+        saveDebounced();
     },
 
 
@@ -187,10 +214,6 @@ function widgetMouseDown(e, model, widgetListName) {
     data.dragWidgetListName = widgetListName;
     data.isMouseDown = true;
 }
-
-rivets.formatters.formatCalendar = function(calendar) {
-
-};
 
 function refreshCalendar() {
 
@@ -289,6 +312,12 @@ function refreshWeather() {
 refreshWeather();
 
 //TODO: need to refresh calendar
+
+var saveDebounced = debounce(saveData, 200);
+
+function saveData() {
+    store.set('data', data);
+}
 
 rivets.binders['set-weather-class'] = function(el, value){
     el.className += ' wi-yahoo-'+ value;
