@@ -127,7 +127,8 @@ var mainController = {
 
     // weather widget
     addWeather: function (e, model) {
-        model.data.weathers.push({location: 'New York, New York', currentTemperature: '75F', units: 'F'});
+        model.data.weathers.push({top: "135px", left: "784px", location: '', currentTemperature: '', currentCode: 1, forecasts: [{day: "Mon", high: 80, low: 60, text: "Mostly Sunny"}], settings: {location: 'Chicago, IL', unit: 'F', open: false}});
+        refreshWeather();
     },
     removeWeather: function (e, model) {
         model.data.weathers.splice(model.index, 1);
