@@ -84,8 +84,9 @@
 
 
 <div class="google-news rounded-corners" rv-each-rss="data.rsses" rv-draggablex="rss.left" rv-draggabley="rss.top" rv-on-mousedown="controller.rssMouseDown">
+    <h3 class="google-news-widget-title">Google News</h3>
     <div>
-        <p rv-each-headline="rss.items">{ headline }</p>
+        <p rv-each-headline="rss.items" class="google-news-title">{ headline.title } <span class="google-news-source">{ headline.source }</span> </p>
     </div>
     <div class="remove-widget-button" rv-show="data.remove_mode" rv-on-click="controller.removeRss">X</div>
     <div class="refresh-widget-button" rv-on-click="controller.refreshRss">r</div>

@@ -19,7 +19,7 @@ var data = {
     ],
     clocks: [{left: "100px", top: "100px", city: {id: 'America/New_York', name: 'New York'}, settings_open: false, value: ''}, {left: "200px", top: "200px", city: {id: 'America/Chicago', name: 'Chicago'}, settings_open: false, value: ''}],
     stickynotes: [{left: "150px", top: "150px", text: 'hello world'}, {left: "300px", top: "300px", text: 'blah blah'}],
-    rsses: [{maxItemsCount: 5, items: ['HeadlineA', 'HeadlineB', 'HeadlineC']}],
+    rsses: [{maxItemsCount: 5, items: [{title: "", source: ""}]}],
     calendars: [{ currentDay: 1, currentMonth: 1, selectedMonth: 1, selectedYear: 2000}],
     weathers: [{top: "135px", left: "784px", location: '', currentTemperature: '', currentCode: 1, forecasts: [{day: "Mon", high: 80, low: 60, text: "Mostly Sunny"}], settings: {location: 'Chicago, IL', unit: 'F', open: false}}],
 
@@ -241,7 +241,10 @@ function refreshRss() {
             let feed = await parser.parseURL('https://news.google.com/news/rss/headlines?ned=');
             element.items = [];
             for (var i = 0; (i < feed.items.length) && (i < 5); i++) {
-                element.items.push(feed.items[i].title);
+                var lastIndexDash = feed.items[i].title.lastIndexOf('-');
+                var title = feed.items[i].title.substr(0, lastIndexDash);
+                var source = feed.items[i].title.substr(lastIndexDash);
+                element.items.push({title: title, source: source});
             }
         })();
     });
