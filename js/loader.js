@@ -70,126 +70,10 @@ var mainController = {
         saveDebounced();
     },
 
-    // Clock widget
-    addClock: function (e, model) {
-        model.data.clocks.push({left: "300px", top: "300px", city: {id: 'America/New_York', name: 'New York'}});
-        refreshTime();
-        saveDebounced();
-    },
-    removeClock: function (e, model) {
-        model.data.clocks.splice(model.index, 1);
-        saveDebounced();
-    },
-    showClockSettings: function (e, model) {
-        model.data.clocks[model.index].settings_open = true;
-    },
-    // Save widget settings
-    saveClock: function (e, model) {
-        model.data.clocks[model.index].settings_open = false;
-        saveDebounced();
-    },
-    clockMouseDown: function (e, model) {
-        widgetMouseDown(e, model, 'clocks');
-    },
-    selectClockCity: function (e, model) {
-        model.data.clocks[model.index].city = {id: e.currentTarget.value, name: e.currentTarget.options[e.currentTarget.selectedIndex].text};
-    },
 
-    // stickynote widget
-    addStickynote: function (e, model) {
-        model.data.stickynotes.push({left: 400, top: 400, text: ''});
-        saveDebounced();
-    },
-    removeStickynote: function (e, model) {
-        model.data.stickynotes.splice(model.index, 1);
-        saveDebounced();
-    },
-    showStickynoteSettings: function (e, model) {
-        //None
-    },
-    closeStickynoteSettings: function (e, model) {
-        //None
-    },
-    changeStickynoteText: function (e, model) {
-        saveDebounced();
-    },
-    saveStickynote: function (e, model) {
-        //None
-    },
-    stickynoteMouseDown: function (e, model) {
-        widgetMouseDown(e, model, 'stickynotes');
-    },
 
-    // rss widget
-    addRss: function (e, model) {
-        model.data.rsses.push({maxItemsCount: 5, items: [{title: "", source: ""}]});
-        saveDebounced();
-        refreshRss();
-    },
-    removeRss: function (e, model) {
-        model.data.rsses.splice(model.index, 1);
-        saveDebounced();
-    },
-    showRssSettings: function (e, model) {
-        //None
-    },
-    closeRssSettings: function (e, model) {
-        //None
-    },
-    saveRss: function (e, model) {
-        //None
-    },
-    rssMouseDown: function (e, model) {
-        widgetMouseDown(e, model, 'rsses');
-    },
-    refreshRss: function (e, model) {
-        refreshRss();
-    },
 
-    // calendar widget
-    addCalendar: function (e, model) {
-        model.data.calendars.push({ currentDay: 1, currentMonth: 1, selectedMonth: 1, selectedYear: 2000});
-        saveDebounced();
-        refreshCalendar();
-    },
-    removeCalendar: function (e, model) {
-        model.data.calendars.splice(model.index, 1);
-        saveDebounced();
-    },
-    showCalendarSettings: function (e, model) {
-        //None
-    },
-    closeCalendarSettings: function (e, model) {
-        //None
-    },
-    saveCalendar: function (e, model) {
-        //None
-    },
-    calendarMouseDown: function (e, model) {
-        widgetMouseDown(e, model, 'calendars');
-    },
 
-    // weather widget
-    addWeather: function (e, model) {
-        model.data.weathers.push({top: "135px", left: "784px", location: '', currentTemperature: '', currentCode: 1, forecasts: [{day: "Mon", high: 80, low: 60, text: "Mostly Sunny"}], settings: {location: 'Chicago, IL', unit: 'F', open: false}});
-        refreshWeather();
-        saveDebounced();
-    },
-    removeWeather: function (e, model) {
-        model.data.weathers.splice(model.index, 1);
-        saveDebounced();
-    },
-    showWeatherSettings: function (e, model) {
-        model.data.weathers[model.index].settings.open = true;
-    },
-    saveWeather: function (e, model) {
-        model.data.weathers[model.index].settings.open = false;
-        refreshWeather();
-        saveDebounced();
-    },
-    weatherMouseDown: function (e, model) {
-        widgetMouseDown(e, model, 'weathers');
-    },
 
     elementDrag: function (e, model) {
         if (data.isMouseDown) {
@@ -206,6 +90,8 @@ var mainController = {
 
 
 };
+
+mainController = {...mainController, ...clockController, ...stickynoteController, ...rssController, ...weatherController, ...calendarController};
 
 function widgetMouseDown(e, model, widgetListName) {
     data.mouseXOffset = e.clientX - e.currentTarget.offsetLeft;
@@ -291,6 +177,8 @@ function refreshRss() {
         })();
     });
 }
+
+//TODO: cron to refresh only if elapsed time > 30 mins
 
 refreshRss();
 
