@@ -1,4 +1,4 @@
-#Underground Dash
+# Underground Dash
 OS X Catalina removes the dashboard feature, bring it back with Underground Dash.
 
 ![alt text](./screenshots/screenshot-1.png "Image1")
